@@ -2,28 +2,41 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { motion } from 'framer-motion'
 
 const slides = [
   {
     image: '/infrastructure/download.jpeg',
-    title: 'Education Needs Complete Solution',
-    subtitle: 'Committed to educating and nurturing all students so they may grow towards responsible global citizenship.',
-    buttonText: 'Contact Us',
-    buttonLink: '/contact'
+    title: 'Transform your Future',
+    subtitle: 'Through Education',
+    description: 'Join our innovative learning programs designed to empower your educational journey. Start your path to success today!',
+    stats: [
+      { number: '50+', label: 'Expert Teachers' },
+      { number: '1000+', label: 'Students' },
+      { number: '95%', label: 'Success Rate' }
+    ]
   },
   {
     image: '/school/download (7).jpeg',
-    title: 'Nurturing Future Leaders',
-    subtitle: 'Providing quality education with modern facilities and experienced faculty.',
-    buttonText: 'Learn More',
-    buttonLink: '/about'
+    title: 'Learn & Grow',
+    subtitle: 'With Excellence',
+    description: 'Access world-class education with our modern facilities and experienced faculty. Your success story begins here!',
+    stats: [
+      { number: '30+', label: 'Programs' },
+      { number: '15+', label: 'Years' },
+      { number: '100%', label: 'Support' }
+    ]
   },
   {
     image: '/school/download (6).jpeg',
-    title: 'Excellence in Education',
-    subtitle: 'Building character, creativity, and academic excellence.',
-    buttonText: 'Join Us',
-    buttonLink: '/admission'
+    title: 'Discover Your Potential',
+    subtitle: 'Start Today',
+    description: 'Experience personalized learning that adapts to your needs. Let\'s unlock your full potential together!',
+    stats: [
+      { number: '24/7', label: 'Support' },
+      { number: '200+', label: 'Courses' },
+      { number: '98%', label: 'Satisfaction' }
+    ]
   }
 ]
 
@@ -33,134 +46,202 @@ const HeroSection = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length)
-    }, 5000) // Change slide every 5 seconds
-
+    }, 5000)
     return () => clearInterval(timer)
   }, [])
 
   return (
-    <div className="w-full">
-      {/* Hero Slider */}
-      <div className="relative h-[calc(100vh-150px)] overflow-hidden">
-        {/* Decorative Elements */}
-        <div className="absolute top-0 right-0 w-1/3 h-full opacity-20 bg-gradient-to-b from-[#154265] to-transparent transform rotate-45" />
-        <div className="absolute bottom-0 left-0 w-1/2 h-1/2 opacity-10 bg-gradient-to-t from-[#2390d4] to-transparent" />
-        <div className="absolute top-20 left-20 w-32 h-32 opacity-10 rounded-full bg-[#154265] blur-3xl" />
-        <div className="absolute bottom-20 right-20 w-40 h-40 opacity-10 rounded-full bg-[#2390d4] blur-3xl" />
-        
-        {/* Dot Pattern Overlay */}
-        <div className="absolute inset-0 opacity-5" 
-             style={{
-               backgroundImage: 'radial-gradient(circle, #154265 1px, transparent 1px)',
-               backgroundSize: '30px 30px'
-             }} />
-
-        {slides.map((slide, index) => (
-          <div
-            key={index}
-            className={`absolute top-0 left-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
-              currentSlide === index ? 'opacity-100' : 'opacity-0'
-            }`}
-          >
-            {/* Background Image with Overlay */}
-            <div className="relative w-full h-full">
-              <Image
-                src={slide.image}
-                alt={slide.title}
-                fill
-                className="object-cover"
-                priority={index === 0}
-              />
-              <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70" />
-              
-              {/* Content */}
-              <div className="relative h-full flex flex-col justify-center items-center text-center text-white px-4">
-                {/* Decorative Line */}
-                {/* <div className="w-20 h-1 bg-[#2390d4] mb-8"></div> */}
-                
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 max-w-4xl">
-                  {slide.title}
-                </h1>
-                <p className="text-lg md:text-xl mb-8 max-w-2xl">
-                  {slide.subtitle}
-                </p>
-                <Link
-                  href={slide.buttonLink}
-                  className="group relative overflow-hidden bg-[#154265] hover:bg-[#134d79] text-white px-8 py-3 rounded-full transition-all duration-300"
-                >
-                  <span className="relative z-10">{slide.buttonText}</span>
-                  <div className="absolute inset-0 w-full h-full bg-[#2390d4] transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
-                </Link>
-              </div>
-            </div>
-          </div>
-        ))}
-
-        {/* Slide Navigation Dots */}
-        <div className="absolute bottom-6 left-0 right-0 flex justify-center gap-2">
-          {slides.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentSlide(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                currentSlide === index 
-                  ? 'bg-white scale-125' 
-                  : 'bg-white/50 hover:bg-white/75'
-              }`}
-            />
-          ))}
+    <div className="relative w-full bg-[#f1f8fe] overflow-hidden">
+      {/* Background Decorative Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full">
+          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob" />
+          <div className="absolute top-1/3 right-2/3 w-64 h-64 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-60 animate-blob animation-delay-2000" />
+          <div className="absolute bottom-3/4 right-2/5 w-64 h-64 bg-indigo-200 rounded-full mix-blend-multiply filter blur-xl opacity-50 animate-blob animation-delay-4000" />
         </div>
       </div>
 
-      {/* Mission, Vision, Values Section */}
-      <div className="relative py-16 px-4 overflow-hidden">
-        {/* Background Decorative Elements */}
-        <div className="absolute top-0 right-0 w-72 h-72 bg-[#154265] opacity-5 rounded-full transform translate-x-1/2 -translate-y-1/2" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#2390d4] opacity-5 rounded-full transform -translate-x-1/2 translate-y-1/2" />
-        
-        <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-          {/* Mission */}
-          <div className="text-center p-6 bg-[#e3effb] shadow-[#c0e0f7] border-2 border-[#2390d4] rounded-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-            <div className="w-16 h-16 mx-auto mb-4 text-[#154265] bg-[#e3effb] rounded-full flex items-center justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-              </svg>
-            </div>
-            <h2 className="text-2xl font-bold text-[#154265] mb-4">OUR MISSION</h2>
-            <p className="text-gray-600">
-              The mission of the Catholic Church is to deliver quality education that nurtures intellectual growth, 
-              character development, and spiritual formation in our students.
-            </p>
-          </div>
+      <div className="relative container mx-auto px-4 py-20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          {/* Content Section */}
+          <motion.div 
+            className="lg:col-span-5 space-y-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2 }}
+              className="inline-block"
+            >
+              <span className="px-4 py-2 bg-[#e3effb] text-[#1572b4] rounded-full text-sm font-medium">
+                Welcome to Excellence
+              </span>
+            </motion.div>
 
-          {/* Vision */}
-          <div className="text-center p-6 bg-[#e3effb] shadow-[#c0e0f7] border-2 border-[#2390d4] rounded-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-            <div className="w-16 h-16 mx-auto mb-4 text-[#154265] bg-[#e3effb] rounded-full flex items-center justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
-            </div>
-            <h2 className="text-2xl font-bold text-[#154265] mb-4">OUR VISION</h2>
-            <p className="text-gray-600">
-              The Catholic Church seeks to consistently produce all-round students who are academically excellent, 
-              morally upright, and socially responsible.
-            </p>
-          </div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4 }}
+              className="space-y-6"
+            >
+              <h1 className="text-5xl lg:text-6xl font-bold text-gray-900">
+                {slides[currentSlide].title} {" "}
+                <span className=" text-[#1572b4] mt-2">
+                  {slides[currentSlide].subtitle}
+                </span>
+              </h1>
+              <p className="text-lg text-gray-600 max-w-xl">
+                {slides[currentSlide].description}
+              </p>
 
-          {/* Values */}
-          <div className="text-center p-6 bg-[#e3effb] shadow-[#c0e0f7] border-2 border-[#2390d4] rounded-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-            <div className="w-16 h-16 mx-auto mb-4 text-[#154265] bg-[#e3effb] rounded-full flex items-center justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-              </svg>
+              {/* Stats Grid */}
+              <div className="grid grid-cols-3 gap-4 py-6">
+                {slides[currentSlide].stats.map((stat, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.6 + index * 0.1 }}
+                    className="text-center"
+                  >
+                    <div className="text-2xl font-bold text-[#1572b4]">{stat.number}</div>
+                    <div className="text-sm text-gray-600">{stat.label}</div>
+                  </motion.div>
+                ))}
+              </div>
+
+              <div className="flex gap-4">
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Link
+                    href="/get-started"
+                    className="inline-flex items-center px-6 py-3 bg-[#1572b4] text-white rounded-full font-medium hover:bg-[#125c92] transition-colors"
+                  >
+                    Get Started
+                    <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </Link>
+                </motion.div>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Link
+                    href="/learn-more"
+                    className="inline-flex items-center px-6 py-3 border-2 border-[#2390d4] text-[#2390d4] rounded-full font-medium hover:bg-[#e3effb] transition-colors"
+                  >
+                    Learn More
+                  </Link>
+                </motion.div>
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* Image Section */}
+          <motion.div 
+            className="lg:col-span-7 relative"
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="relative h-[600px]">
+              {/* Main Image Card */}
+              <motion.div
+                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[80%] h-[400px]"
+                animate={{
+                  y: [0, -10, 0],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              >
+                <div className="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl">
+                  <Image
+                    src={slides[currentSlide].image}
+                    alt={slides[currentSlide].title}
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                </div>
+
+                {/* Floating Cards */}
+                <motion.div
+                  className="absolute -left-20 top-20 bg-white p-4 rounded-xl shadow-lg"
+                  animate={{
+                    y: [0, -15, 0],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 1
+                  }}
+                >
+                  <div className="flex items-center space-x-3">
+                    <div className="w-10 h-10 bg-[#e3effb] rounded-full flex items-center justify-center">
+                      <svg className="w-6 h-6 text-[#1572b4]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <div className="font-medium text-[#1572b4] font-semibold">Success Rate</div>
+                      <div className="text-sm text-gray-500">95% Guaranteed</div>
+                    </div>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  className="absolute -right-10 bottom-20 bg-white p-4 rounded-xl shadow-lg"
+                  animate={{
+                    y: [0, -20, 0],
+                  }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 0.5
+                  }}
+                >
+                  <div className="flex items-center space-x-3">
+                    <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                      <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                      </svg>
+                    </div>
+                    <div>
+                      <div className="font-medium text-green-600 font-semibold">Join Now</div>
+                      <div className="text-sm text-gray-500">Limited Seats</div>
+                    </div>
+                  </div>
+                </motion.div>
+              </motion.div>
+
+              {/* Navigation Dots */}
+              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                {slides.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentSlide(index)}
+                    className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                      currentSlide === index 
+                        ? 'bg-[#1572b4] scale-125' 
+                        : 'bg-gray-300 hover:bg-[#4aabe6]'
+                    }`}
+                  />
+                ))}
+              </div>
             </div>
-            <h2 className="text-2xl font-bold text-[#154265] mb-4">VALUES</h2>
-            <p className="text-gray-600">
-              Knowledge, Service, Love - We believe in fostering academic excellence while instilling strong moral values 
-              and a commitment to serving others.
-            </p>
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>
